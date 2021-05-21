@@ -16,7 +16,8 @@ services:
       - ./mysql/log:/var/log/mysql
       - ./mysql/scripts:/docker-entrypoint-initdb.d
     networks:
-      - backend
+      default:
+        ipv4_address: 172.18.0.2
     restart: always
     container_name: mysql
 
@@ -32,8 +33,8 @@ services:
     volumes: 
       - ./www:/var/www/html:cached
     networks:
-      - frontend
-      - backend
+      default:
+        ipv4_address: 172.18.0.3
     restart: always
     container_name: php
 
@@ -52,13 +53,17 @@ services:
       - ./nginx/cert:/etc/nginx/cert
       - ./nginx/log:/var/log/nginx
     networks:
-      - frontend
+      default: 
+        ipv4_address: 172.18.0.4
     restart: always
     container_name: nginx
 
 networks:
-  frontend:
-  backend:
+  default:
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
+          gateway: 172.18.0.1
 
  
 
