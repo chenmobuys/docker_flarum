@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  mysql:
+    build: 
+      context: ./mysql
+      args: 
+        MYSQL_VERSION: $MYSQL_VERSION
+    environment: 
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+    ports:
+      - 3306:3306
+    volumes: 
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/log:/var/log/mysql
+      - ./mysql/scripts:/docker-entrypoint-initdb.d
+    restart: always
+    container_name: mysql
+
+  php: 
+    build: 
+      context: ./php
+      args: 
+        PHP_VERSION: $PHP_VERSION
+    ports: 
+      - 9000:9000
+    depends_on:
+      - mysql
+    volumes: 
+      - ./www:/www:cached
+    restart: always
+    container_name: php
+
+  nginx:
+    build: 
+      context: ./nginx
+      args: 
+        NGINX_VERSION: $NGINX_VERSION
+    ports: 
+      - 80:8080
+    depends_on: 
+      - php
+    volumes: 
+      - ./www:/www:cached
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/cert:/etc/nginx/cert
+      - ./nginx/log:/var/log/nginx
+    restart: always
+    container_name: nginx
+
+  
+ 
+

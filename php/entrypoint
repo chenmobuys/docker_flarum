@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+if [ -e /www/.gitkeep ]; then
+    rm /www/.gitkeep
+fi
+
+if [ "`ls -A /www`" = "" ]; then
+  cd /www
+  composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+  composer create-project --stability=beta --no-dev flarum/flarum .
+  composer require littlegolden/flarum-lang-simplified-chinese
+fi
+
+exec "php-fpm"
