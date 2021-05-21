@@ -17,7 +17,7 @@ docker-compose up
 数据库配置信息请查看 `mysql/scripts/init.sql`
 
 默认数据库配置：
-
+* 数据库地址：mysql
 * 数据库名：flarum
 * 用户名：flarum
 * 密码：flarum
