@@ -2,7 +2,7 @@
 
 ### 执行初始化命令
 
-项目根目录下执行 `/path/to/docker-lnmp`
+项目根目录下执行
 ```bash
 docker-compose build && chown -R www-data.www-data `ls -F |grep "/$"`
 ```
