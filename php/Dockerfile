@@ -16,7 +16,6 @@ RUN cd /usr/src \
     && apt-get update \
     && apt-get install -y git libjpeg-dev libpng-dev libgif-dev libwebp-dev libwmf-dev libexif-dev libzip-dev\
     && mkdir -p /usr/src/php/ext \
-    && mkdir -p /www \
     && chmod +x /usr/local/bin/entrypoint 
 
 RUN echo -e "\033[32m\n#########################################\n############# install redis #############\n#########################################\n\033[0m"
