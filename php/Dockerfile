@@ -30,6 +30,8 @@ RUN echo -e "\033[32m\n#########################################\n########### in
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
+RUN chown -R www-data.www-data /var/www
+
 USER www-data:www-data
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
