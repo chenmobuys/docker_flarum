@@ -10,7 +10,7 @@ if [ "`ls -A /var/www/html`" = "" ]; then
   cd /var/www/html
   composer create-project --stability=beta --no-install --no-progress --no-plugins --no-scripts --keep-vcs --repository-url=$repository_url flarum/flarum .
   composer config repo.packagist composer $repository_url
-  composer require ffans/lang-simplified-chinese --no-update
+  composer require ffans/lang-simplified-chinese fof/profile-image-cro --no-update
   composer install --no-progress --no-plugins --no-scripts
   composer dump-autoload --optimize --no-dev
 fi
